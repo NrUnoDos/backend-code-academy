@@ -3209,7 +3209,7 @@ rec {
           }
           {
             name = "thiserror";
-            packageId = "thiserror 1.0.68";
+            packageId = "thiserror 1.0.69";
           }
           {
             name = "tower-layer";
@@ -3270,9 +3270,9 @@ rec {
       };
       "allocator-api2" = rec {
         crateName = "allocator-api2";
-        version = "0.2.18";
+        version = "0.2.19";
         edition = "2018";
-        sha256 = "0kr6lfnxvnj164j1x38g97qjlhb7akppqzvgfs0697140ixbav2w";
+        sha256 = "0gsmqa7yvccrmwzzb6dlaahrrbdq6rqgkrsbgr2jq91fgnpc4731";
         libName = "allocator_api2";
         authors = [
           "Zakarum <zaq.dev@icloud.com>"
@@ -3313,9 +3313,9 @@ rec {
       };
       "anstream" = rec {
         crateName = "anstream";
-        version = "0.6.17";
+        version = "0.6.18";
         edition = "2021";
-        sha256 = "0f0k3g8hl8k8cd8f3rq6yj04415jhd3k3kz1mwnki1jx1wzyb893";
+        sha256 = "16sjk4x3ns2c3ya1x28a44kh6p47c7vhk27251i015hik1lm7k4a";
         dependencies = [
           {
             name = "anstyle";
@@ -4313,9 +4313,9 @@ rec {
       };
       "cc" = rec {
         crateName = "cc";
-        version = "1.1.34";
+        version = "1.1.37";
         edition = "2018";
-        sha256 = "1j9dh96lpkksmfvjfiqa5nrlswm5l6lj54m5jf7i0iik8l6lgfb7";
+        sha256 = "1kxllyj42nr11iwk9rknpaf7lnk8wx4fwwdbin56sd4js0k5qm20";
         authors = [
           "Alex Crichton <alex@alexcrichton.com>"
         ];
@@ -5315,9 +5315,9 @@ rec {
       };
       "fastrand" = rec {
         crateName = "fastrand";
-        version = "2.1.1";
+        version = "2.2.0";
         edition = "2018";
-        sha256 = "19nyzdq3ha4g173364y2wijmd6jlyms8qx40daqkxsnl458jmh78";
+        sha256 = "1i0sp22gv8n4h4w5cf10l2b3rfdi0da2kp0d4hl7jw65fdp80vs8";
         authors = [
           "Stjepan Glavina <stjepang@gmail.com>"
         ];
@@ -6054,18 +6054,17 @@ rec {
         };
         resolvedDefaultFeatures = [ "ahash" "allocator-api2" "default" "inline-more" ];
       };
-      "hashbrown 0.15.0" = rec {
+      "hashbrown 0.15.1" = rec {
         crateName = "hashbrown";
-        version = "0.15.0";
+        version = "0.15.1";
         edition = "2021";
-        sha256 = "1yx4xq091s7i6mw6bn77k8cp4jrpcac149xr32rg8szqsj27y20y";
+        sha256 = "1czsvasi3azv2079fcvbhvpisa16w6fi1mfk8zm2c5wbyqdgr6rs";
         authors = [
           "Amanieu d'Antras <amanieu@gmail.com>"
         ];
         features = {
           "alloc" = [ "dep:alloc" ];
           "allocator-api2" = [ "dep:allocator-api2" ];
-          "borsh" = [ "dep:borsh" ];
           "compiler_builtins" = [ "dep:compiler_builtins" ];
           "core" = [ "dep:core" ];
           "default" = [ "default-hasher" "inline-more" "allocator-api2" "equivalent" "raw-entry" ];
@@ -7506,7 +7505,7 @@ rec {
           }
           {
             name = "hashbrown";
-            packageId = "hashbrown 0.15.0";
+            packageId = "hashbrown 0.15.1";
             usesDefaultFeatures = false;
           }
           {
@@ -7960,9 +7959,9 @@ rec {
       };
       "libc" = rec {
         crateName = "libc";
-        version = "0.2.161";
+        version = "0.2.162";
         edition = "2015";
-        sha256 = "1lc5s3zd0491x9zxrv2kvclai1my1spz950pkkyry4vwh318k54f";
+        sha256 = "1633a00yyx45kzx9r54fndvr8njsjqyr7zl12mzgsmgyczg8glhq";
         authors = [
           "The Rust Project Developers"
         ];
@@ -8580,7 +8579,7 @@ rec {
           }
           {
             name = "thiserror";
-            packageId = "thiserror 1.0.68";
+            packageId = "thiserror 1.0.69";
           }
           {
             name = "url";
@@ -8916,7 +8915,7 @@ rec {
           }
           {
             name = "thiserror";
-            packageId = "thiserror 1.0.68";
+            packageId = "thiserror 1.0.69";
             optional = true;
           }
           {
@@ -9483,7 +9482,7 @@ rec {
           }
           {
             name = "thiserror";
-            packageId = "thiserror 1.0.68";
+            packageId = "thiserror 1.0.69";
           }
           {
             name = "tokio";
@@ -9557,7 +9556,7 @@ rec {
           }
           {
             name = "thiserror";
-            packageId = "thiserror 1.0.68";
+            packageId = "thiserror 1.0.69";
           }
           {
             name = "tinyvec";
@@ -9583,9 +9582,9 @@ rec {
       };
       "quinn-udp" = rec {
         crateName = "quinn-udp";
-        version = "0.5.6";
+        version = "0.5.7";
         edition = "2021";
-        sha256 = "100pqx0rnscnm1l45s71hj618bx1ghcihdr47hii5zygx8bf0ip3";
+        sha256 = "1nj3yb1zw4bnw2m4phh8ajd3q16nrk56lan8r8aknw87d1n64nkx";
         libName = "quinn_udp";
         dependencies = [
           {
@@ -11697,7 +11696,7 @@ rec {
           }
           {
             name = "thiserror";
-            packageId = "thiserror 1.0.68";
+            packageId = "thiserror 1.0.69";
           }
           {
             name = "time";
@@ -11914,7 +11913,7 @@ rec {
           }
           {
             name = "thiserror";
-            packageId = "thiserror 1.0.68";
+            packageId = "thiserror 1.0.69";
           }
         ];
         features = {
@@ -12521,18 +12520,18 @@ rec {
         sha256 = "0xkal5l2r3r9p9j90x35qy4npbdwxz4gskvbijs6msymaangas9k";
 
       };
-      "thiserror 1.0.68" = rec {
+      "thiserror 1.0.69" = rec {
         crateName = "thiserror";
-        version = "1.0.68";
+        version = "1.0.69";
         edition = "2021";
-        sha256 = "14m8zrzcgwczrnpd1qpsz3qrspfcw69m4s1rccc9gfqbh3f9kp82";
+        sha256 = "0lizjay08agcr5hs9yfzzj6axs53a2rgx070a1dsi3jpkcrzbamn";
         authors = [
           "David Tolnay <dtolnay@gmail.com>"
         ];
         dependencies = [
           {
             name = "thiserror-impl";
-            packageId = "thiserror-impl 1.0.68";
+            packageId = "thiserror-impl 1.0.69";
           }
         ];
 
@@ -12555,11 +12554,11 @@ rec {
           "default" = [ "std" ];
         };
       };
-      "thiserror-impl 1.0.68" = rec {
+      "thiserror-impl 1.0.69" = rec {
         crateName = "thiserror-impl";
-        version = "1.0.68";
+        version = "1.0.69";
         edition = "2021";
-        sha256 = "0zjckd8jp6q0db1l8vc85bbcxqzv3sianpx4v29jfkgnlv4ixim7";
+        sha256 = "1h84fmn2nai41cxbhk6pqf46bxqq1b344v8yz089w1chzi76rvjg";
         procMacro = true;
         libName = "thiserror_impl";
         authors = [

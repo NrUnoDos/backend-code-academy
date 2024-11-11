@@ -1,6 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-cargo-llvm-cov.url = "github:NixOS/nixpkgs/pull/353741/head";
     fenix.url = "github:nix-community/fenix";
     devenv = {
       url = "github:cachix/devenv";
@@ -26,7 +27,15 @@
       "aarch64-darwin"
     ];
 
-    importNixpkgs = system: import nixpkgs {inherit system;};
+    importNixpkgs = system:
+      import nixpkgs {
+        inherit system;
+        overlays = [
+          (final: prev: {
+            inherit (import inputs.nixpkgs-cargo-llvm-cov {inherit system;}) cargo-llvm-cov;
+          })
+        ];
+      };
 
     mkDevShell = {
       system,
