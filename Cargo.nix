@@ -3557,9 +3557,9 @@ rec {
       };
       "axum" = rec {
         crateName = "axum";
-        version = "0.7.7";
+        version = "0.7.8";
         edition = "2021";
-        sha256 = "1bkhgnj7rk1aih1c1ylqkmn72mjbgi8lql1paim35j3s613kjkjh";
+        sha256 = "13fnk62vgcgrmm5szc3q48ac3ba3923wsij5m60v93x0ina1pi29";
         dependencies = [
           {
             name = "async-trait";
@@ -3691,6 +3691,7 @@ rec {
           {
             name = "serde_json";
             packageId = "serde_json";
+            features = [ "raw_value" ];
           }
           {
             name = "tokio";
@@ -3710,7 +3711,7 @@ rec {
           }
         ];
         features = {
-          "__private_docs" = [ "tower/full" "dep:tower-http" ];
+          "__private_docs" = [ "axum-core/__private_docs" "tower/full" "dep:tower-http" ];
           "default" = [ "form" "http1" "json" "matched-path" "original-uri" "query" "tokio" "tower-log" "tracing" ];
           "form" = [ "dep:serde_urlencoded" ];
           "http1" = [ "dep:hyper" "hyper?/http1" "hyper-util?/http1" ];
@@ -3806,15 +3807,16 @@ rec {
       };
       "axum-extra" = rec {
         crateName = "axum-extra";
-        version = "0.9.4";
+        version = "0.9.5";
         edition = "2021";
-        sha256 = "1ydi660sqd9bl6252axx12xkdn9v3jqgkidny6f71sla305j5hvk";
+        sha256 = "1c10p1jcd0wkm7kdphh45y4ma3ahp9y7rj1h3kxmrhzkx5qlsqrp";
         libName = "axum_extra";
         dependencies = [
           {
             name = "axum";
             packageId = "axum";
             usesDefaultFeatures = false;
+            features = [ "original-uri" ];
           }
           {
             name = "axum-core";
@@ -3823,6 +3825,11 @@ rec {
           {
             name = "bytes";
             packageId = "bytes";
+          }
+          {
+            name = "fastrand";
+            packageId = "fastrand";
+            optional = true;
           }
           {
             name = "futures-util";
@@ -3852,6 +3859,11 @@ rec {
             packageId = "mime";
           }
           {
+            name = "multer";
+            packageId = "multer";
+            optional = true;
+          }
+          {
             name = "pin-project-lite";
             packageId = "pin-project-lite";
           }
@@ -3873,18 +3885,8 @@ rec {
             name = "tower-service";
             packageId = "tower-service";
           }
-          {
-            name = "tracing";
-            packageId = "tracing";
-            optional = true;
-            usesDefaultFeatures = false;
-          }
         ];
         devDependencies = [
-          {
-            name = "axum";
-            packageId = "axum";
-          }
           {
             name = "serde";
             packageId = "serde";
@@ -3903,19 +3905,19 @@ rec {
           "cookie-key-expansion" = [ "cookie" "cookie?/key-expansion" ];
           "cookie-private" = [ "cookie" "cookie?/private" ];
           "cookie-signed" = [ "cookie" "cookie?/signed" ];
-          "default" = [ "tracing" ];
-          "erased-json" = [ "dep:serde_json" ];
+          "default" = [ "tracing" "multipart" ];
+          "erased-json" = [ "dep:serde_json" "dep:typed-json" ];
           "form" = [ "dep:serde_html_form" ];
           "json-deserializer" = [ "dep:serde_json" "dep:serde_path_to_error" ];
           "json-lines" = [ "dep:serde_json" "dep:tokio-util" "dep:tokio-stream" "tokio-util?/io" "tokio-stream?/io-util" "dep:tokio" ];
-          "multipart" = [ "dep:multer" ];
+          "multipart" = [ "dep:multer" "dep:fastrand" ];
           "protobuf" = [ "dep:prost" ];
           "query" = [ "dep:serde_html_form" ];
-          "tracing" = [ "dep:tracing" "axum-core/tracing" "axum/tracing" ];
+          "tracing" = [ "axum-core/tracing" "axum/tracing" ];
           "typed-header" = [ "dep:headers" ];
           "typed-routing" = [ "dep:axum-macros" "dep:percent-encoding" "dep:serde_html_form" "dep:form_urlencoded" ];
         };
-        resolvedDefaultFeatures = [ "default" "tracing" "typed-header" ];
+        resolvedDefaultFeatures = [ "default" "multipart" "tracing" "typed-header" ];
       };
       "backtrace" = rec {
         crateName = "backtrace";
@@ -8269,6 +8271,69 @@ rec {
           "nightly_derive" = [ "proc-macro2/nightly" ];
         };
       };
+      "multer" = rec {
+        crateName = "multer";
+        version = "3.1.0";
+        edition = "2018";
+        sha256 = "0jr2snfay5fjz50yvdja4vbnddlj1iriiqjym88pbj3daiv7gs43";
+        authors = [
+          "Rousan Ali <hello@rousan.io>"
+        ];
+        dependencies = [
+          {
+            name = "bytes";
+            packageId = "bytes";
+          }
+          {
+            name = "encoding_rs";
+            packageId = "encoding_rs";
+          }
+          {
+            name = "futures-util";
+            packageId = "futures-util";
+            usesDefaultFeatures = false;
+          }
+          {
+            name = "http";
+            packageId = "http 1.1.0";
+          }
+          {
+            name = "httparse";
+            packageId = "httparse";
+          }
+          {
+            name = "memchr";
+            packageId = "memchr";
+          }
+          {
+            name = "mime";
+            packageId = "mime";
+          }
+          {
+            name = "spin";
+            packageId = "spin";
+            usesDefaultFeatures = false;
+            features = [ "spin_mutex" ];
+          }
+        ];
+        buildDependencies = [
+          {
+            name = "version_check";
+            packageId = "version_check";
+          }
+        ];
+        features = {
+          "all" = [ "json" ];
+          "json" = [ "serde" "serde_json" ];
+          "log" = [ "dep:log" ];
+          "serde" = [ "dep:serde" ];
+          "serde_json" = [ "dep:serde_json" ];
+          "tokio" = [ "dep:tokio" ];
+          "tokio-io" = [ "tokio" "tokio-util" ];
+          "tokio-util" = [ "dep:tokio-util" ];
+        };
+        resolvedDefaultFeatures = [ "default" ];
+      };
       "nom" = rec {
         crateName = "nom";
         version = "7.1.3";
@@ -12221,7 +12286,7 @@ rec {
           "ticket_mutex" = [ "mutex" ];
           "use_ticket_mutex" = [ "mutex" "ticket_mutex" ];
         };
-        resolvedDefaultFeatures = [ "once" ];
+        resolvedDefaultFeatures = [ "mutex" "once" "spin_mutex" ];
       };
       "stable_deref_trait" = rec {
         crateName = "stable_deref_trait";
