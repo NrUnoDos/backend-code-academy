@@ -3557,9 +3557,9 @@ rec {
       };
       "axum" = rec {
         crateName = "axum";
-        version = "0.7.8";
+        version = "0.7.9";
         edition = "2021";
-        sha256 = "13fnk62vgcgrmm5szc3q48ac3ba3923wsij5m60v93x0ina1pi29";
+        sha256 = "07z7wqczi9i8xb4460rvn39p4wjqwr32hx907crd1vwb2fy8ijpd";
         dependencies = [
           {
             name = "async-trait";
@@ -3807,9 +3807,9 @@ rec {
       };
       "axum-extra" = rec {
         crateName = "axum-extra";
-        version = "0.9.5";
+        version = "0.9.6";
         edition = "2021";
-        sha256 = "1c10p1jcd0wkm7kdphh45y4ma3ahp9y7rj1h3kxmrhzkx5qlsqrp";
+        sha256 = "011gr9fkxild2yv7rxgn9shzlbcpyzvps3vlnwpiq2jgj06b7567";
         libName = "axum_extra";
         dependencies = [
           {
