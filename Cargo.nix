@@ -8202,9 +8202,9 @@ rec {
       };
       "mockall" = rec {
         crateName = "mockall";
-        version = "0.13.0";
+        version = "0.13.1";
         edition = "2021";
-        sha256 = "0nh6ghj46h4p7923mq6dycfdl7v1xr3cs9p8426d4lypnqzqphnl";
+        sha256 = "1lir70dd9cnsjlf20gi3i51ha9n7mlrkx74bx5gfszlcdk6bz9ir";
         authors = [
           "Alan Somers <asomers@gmail.com>"
         ];
@@ -8241,9 +8241,9 @@ rec {
       };
       "mockall_derive" = rec {
         crateName = "mockall_derive";
-        version = "0.13.0";
+        version = "0.13.1";
         edition = "2021";
-        sha256 = "0810zddxlccc4kx6pjb24q9agzjf4h5l1iyv3yd4wc9hypki841l";
+        sha256 = "1608qajqrz23xbvv81alc6wm4l24as1bsqg4shdh3sggq8231ji5";
         procMacro = true;
         authors = [
           "Alan Somers <asomers@gmail.com>"
