@@ -4315,9 +4315,9 @@ rec {
       };
       "cc" = rec {
         crateName = "cc";
-        version = "1.2.0";
+        version = "1.2.1";
         edition = "2018";
-        sha256 = "1f3dndil5f864zhyc6f513xshs6b8mlxn0ipqww0awdxb0hr7sqs";
+        sha256 = "0izavwg0w3ahhp8jhajy97adv53r6ggv11g6czyz6pjx43rfk7gx";
         authors = [
           "Alex Crichton <alex@alexcrichton.com>"
         ];
@@ -6719,7 +6719,7 @@ rec {
           }
           {
             name = "rustls";
-            packageId = "rustls 0.23.16";
+            packageId = "rustls 0.23.17";
             usesDefaultFeatures = false;
           }
           {
@@ -6755,7 +6755,7 @@ rec {
           }
           {
             name = "rustls";
-            packageId = "rustls 0.23.16";
+            packageId = "rustls 0.23.17";
             usesDefaultFeatures = false;
             features = [ "tls12" ];
           }
@@ -7839,7 +7839,7 @@ rec {
           }
           {
             name = "rustls";
-            packageId = "rustls 0.23.16";
+            packageId = "rustls 0.23.17";
             optional = true;
             usesDefaultFeatures = false;
             features = [ "ring" "logging" "std" "tls12" ];
@@ -7939,9 +7939,9 @@ rec {
       };
       "libc" = rec {
         crateName = "libc";
-        version = "0.2.162";
+        version = "0.2.164";
         edition = "2015";
-        sha256 = "1633a00yyx45kzx9r54fndvr8njsjqyr7zl12mzgsmgyczg8glhq";
+        sha256 = "0gy1yzvc6x760r9zfkhl1f7p91zz559nxspvwfrajpf7p03gwfs3";
         authors = [
           "The Rust Project Developers"
         ];
@@ -9514,7 +9514,7 @@ rec {
           }
           {
             name = "rustls";
-            packageId = "rustls 0.23.16";
+            packageId = "rustls 0.23.17";
             optional = true;
             usesDefaultFeatures = false;
             features = [ "std" ];
@@ -9607,7 +9607,7 @@ rec {
           }
           {
             name = "rustls";
-            packageId = "rustls 0.23.16";
+            packageId = "rustls 0.23.17";
             optional = true;
             usesDefaultFeatures = false;
             features = [ "std" ];
@@ -10555,7 +10555,7 @@ rec {
           }
           {
             name = "rustls";
-            packageId = "rustls 0.23.16";
+            packageId = "rustls 0.23.17";
             optional = true;
             usesDefaultFeatures = false;
             target = { target, features }: (!("wasm32" == target."arch" or null));
@@ -10671,7 +10671,7 @@ rec {
           }
           {
             name = "rustls";
-            packageId = "rustls 0.23.16";
+            packageId = "rustls 0.23.17";
             usesDefaultFeatures = false;
             target = {target, features}: (!("wasm32" == target."arch" or null));
             features = [ "ring" ];
@@ -10999,11 +10999,11 @@ rec {
         };
         resolvedDefaultFeatures = [ "default" "log" "logging" "ring" "tls12" ];
       };
-      "rustls 0.23.16" = rec {
+      "rustls 0.23.17" = rec {
         crateName = "rustls";
-        version = "0.23.16";
+        version = "0.23.17";
         edition = "2021";
-        sha256 = "0plj2xb4cjmj4b9iii8abdd923x81sgjxqblhnji4rxkv7spzs7f";
+        sha256 = "07lg2b56s3gp3acd8a6yaqbpji8vv3xmv3ay8vaacjy525ap86kz";
         dependencies = [
           {
             name = "log";
@@ -13181,7 +13181,7 @@ rec {
         dependencies = [
           {
             name = "rustls";
-            packageId = "rustls 0.23.16";
+            packageId = "rustls 0.23.17";
             usesDefaultFeatures = false;
             features = [ "std" ];
           }
@@ -14139,7 +14139,7 @@ rec {
           }
           {
             name = "rustls";
-            packageId = "rustls 0.23.16";
+            packageId = "rustls 0.23.17";
             optional = true;
             usesDefaultFeatures = false;
             features = [ "ring" "logging" "std" "tls12" ];
@@ -14162,7 +14162,7 @@ rec {
         devDependencies = [
           {
             name = "rustls";
-            packageId = "rustls 0.23.16";
+            packageId = "rustls 0.23.17";
             usesDefaultFeatures = false;
             features = [ "std" "ring" ];
           }
