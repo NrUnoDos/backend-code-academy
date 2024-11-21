@@ -9405,9 +9405,9 @@ rec {
       };
       "proc-macro2" = rec {
         crateName = "proc-macro2";
-        version = "1.0.90";
+        version = "1.0.91";
         edition = "2021";
-        sha256 = "0ww6566c1x26h4xy1dzd1f7rr85rg9hfj8wwj1xgi7blzv9wxqfl";
+        sha256 = "1csb3sy18vffw39nra971071n8r8rprj17fmw2kga46gpq230zih";
         libName = "proc_macro2";
         authors = [
           "David Tolnay <dtolnay@gmail.com>"
@@ -12400,9 +12400,9 @@ rec {
       };
       "syn" = rec {
         crateName = "syn";
-        version = "2.0.88";
+        version = "2.0.89";
         edition = "2021";
-        sha256 = "1x5qsf5azgas9xffyr78nxgmsq855wirhlcfpxazciwzcghs9sgq";
+        sha256 = "0kicx48gndpxkkqnpv89f1slrzzbyldhr8nyhk6pmj61y6169m24";
         authors = [
           "David Tolnay <dtolnay@gmail.com>"
         ];
