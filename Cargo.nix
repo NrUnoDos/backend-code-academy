@@ -3593,7 +3593,7 @@ rec {
           }
           {
             name = "hyper";
-            packageId = "hyper 1.5.0";
+            packageId = "hyper 1.5.1";
             optional = true;
           }
           {
@@ -3652,7 +3652,7 @@ rec {
           }
           {
             name = "sync_wrapper";
-            packageId = "sync_wrapper 1.0.1";
+            packageId = "sync_wrapper 1.0.2";
           }
           {
             name = "tokio";
@@ -3774,7 +3774,7 @@ rec {
           }
           {
             name = "sync_wrapper";
-            packageId = "sync_wrapper 1.0.1";
+            packageId = "sync_wrapper 1.0.2";
           }
           {
             name = "tower-layer";
@@ -5923,11 +5923,11 @@ rec {
         features = {
         };
       };
-      "h2 0.4.6" = rec {
+      "h2 0.4.7" = rec {
         crateName = "h2";
-        version = "0.4.6";
+        version = "0.4.7";
         edition = "2021";
-        sha256 = "01cjblya9zxyadvxcmgcv2bk9r9pyc8l8bbchjdg88clk738lkjj";
+        sha256 = "0bljg66n2x3c5yzbi12v2jfcj77hb35rjq0gq21x0d6n52bjgbnc";
         authors = [
           "Carl Lerche <me@carllerche.com>"
           "Sean McArthur <sean@seanmonstar.com>"
@@ -6517,11 +6517,11 @@ rec {
         };
         resolvedDefaultFeatures = [ "client" "h2" "http1" "http2" "runtime" "socket2" "tcp" ];
       };
-      "hyper 1.5.0" = rec {
+      "hyper 1.5.1" = rec {
         crateName = "hyper";
-        version = "1.5.0";
+        version = "1.5.1";
         edition = "2021";
-        sha256 = "16pspkgizcnsr1qcpqvm5l45nfwk7244q9av56cqqwm40slg1gxv";
+        sha256 = "07s87id0566m2p5dc5q6nqmxz5r8drqd81b7w4q44djgxwkqi0cp";
         authors = [
           "Sean McArthur <sean@seanmonstar.com>"
         ];
@@ -6543,7 +6543,7 @@ rec {
           }
           {
             name = "h2";
-            packageId = "h2 0.4.6";
+            packageId = "h2 0.4.7";
             optional = true;
           }
           {
@@ -6611,7 +6611,7 @@ rec {
         ];
         features = {
           "client" = [ "dep:want" "dep:pin-project-lite" "dep:smallvec" ];
-          "ffi" = [ "dep:libc" "dep:http-body-util" "futures-util?/alloc" ];
+          "ffi" = [ "dep:http-body-util" "futures-util?/alloc" ];
           "full" = [ "client" "http1" "http2" "server" ];
           "http1" = [ "dep:futures-channel" "dep:futures-util" "dep:httparse" "dep:itoa" ];
           "http2" = [ "dep:futures-channel" "dep:futures-util" "dep:h2" ];
@@ -6708,7 +6708,7 @@ rec {
           }
           {
             name = "hyper";
-            packageId = "hyper 1.5.0";
+            packageId = "hyper 1.5.1";
             usesDefaultFeatures = false;
           }
           {
@@ -6817,7 +6817,7 @@ rec {
           }
           {
             name = "hyper";
-            packageId = "hyper 1.5.0";
+            packageId = "hyper 1.5.1";
           }
           {
             name = "pin-project-lite";
@@ -6855,7 +6855,7 @@ rec {
           }
           {
             name = "hyper";
-            packageId = "hyper 1.5.0";
+            packageId = "hyper 1.5.1";
             features = [ "full" ];
           }
           {
@@ -7622,9 +7622,9 @@ rec {
       };
       "itoa" = rec {
         crateName = "itoa";
-        version = "1.0.11";
+        version = "1.0.13";
         edition = "2018";
-        sha256 = "0nv9cqjwzr3q58qz84dcz63ggc54yhf1yqar1m858m1kfd4g3wa9";
+        sha256 = "1wjf22cawbrf26zjnflhg9aqjpf9gccgyc6djaj70i1zgblm81jl";
         authors = [
           "David Tolnay <dtolnay@gmail.com>"
         ];
@@ -10472,7 +10472,7 @@ rec {
           }
           {
             name = "h2";
-            packageId = "h2 0.4.6";
+            packageId = "h2 0.4.7";
             optional = true;
             target = { target, features }: (!("wasm32" == target."arch" or null));
           }
@@ -10492,7 +10492,7 @@ rec {
           }
           {
             name = "hyper";
-            packageId = "hyper 1.5.0";
+            packageId = "hyper 1.5.1";
             target = { target, features }: (!("wasm32" == target."arch" or null));
             features = [ "http1" "client" ];
           }
@@ -10594,7 +10594,7 @@ rec {
           }
           {
             name = "sync_wrapper";
-            packageId = "sync_wrapper 1.0.1";
+            packageId = "sync_wrapper 1.0.2";
             features = [ "futures" ];
           }
           {
@@ -10658,7 +10658,7 @@ rec {
           }
           {
             name = "hyper";
-            packageId = "hyper 1.5.0";
+            packageId = "hyper 1.5.1";
             usesDefaultFeatures = false;
             target = {target, features}: (!("wasm32" == target."arch" or null));
             features = [ "http1" "http2" "client" "server" ];
@@ -12444,11 +12444,11 @@ rec {
           "futures-core" = [ "dep:futures-core" ];
         };
       };
-      "sync_wrapper 1.0.1" = rec {
+      "sync_wrapper 1.0.2" = rec {
         crateName = "sync_wrapper";
-        version = "1.0.1";
-        edition = "2018";
-        sha256 = "150k6lwvr4nl237ngsz8fj5j78k712m4bggrfyjsidllraz5l1m7";
+        version = "1.0.2";
+        edition = "2021";
+        sha256 = "0qvjyasd6w18mjg5xlaq5jgy84jsjfsvmnn12c13gypxbv75dwhb";
         authors = [
           "Actyx AG <developer@actyx.io>"
         ];
@@ -14008,9 +14008,9 @@ rec {
       };
       "unicode-ident" = rec {
         crateName = "unicode-ident";
-        version = "1.0.13";
+        version = "1.0.14";
         edition = "2018";
-        sha256 = "1zm1xylzsdfvm2a5ib9li3g5pp7qnkv4amhspydvgbmd9k6mc6z9";
+        sha256 = "10ywa1pg0glgkr4l3dppjxizr9r2b7im0ycbfa0137l69z5fdfdd";
         libName = "unicode_ident";
         authors = [
           "David Tolnay <dtolnay@gmail.com>"
