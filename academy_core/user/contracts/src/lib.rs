@@ -1,18 +1,20 @@
 use std::future::Future;
 
+use academy_models::user::UserLocale;
 use academy_models::{
     auth::{AccessToken, AuthError, Login},
     email_address::EmailAddress,
     oauth2::OAuth2RegistrationToken,
     session::DeviceName,
     user::{
-        UserComposite, UserDisplayName, UserIdOrSelf, UserInvoiceInfo, UserName, UserPassword,
-        UserProfilePatch,
+        UserComposite, UserDisplayName, UserIdOrSelf, UserInvoiceInfo,
+        UserName, UserPassword, UserProfilePatch,
     },
     RecaptchaResponse, VerificationCode,
 };
 use academy_utils::patch::PatchValue;
 use chrono::{DateTime, Utc};
+use chrono_tz::Tz;
 use thiserror::Error;
 use user::{UserListQuery, UserListResult};
 
@@ -148,6 +150,8 @@ pub struct UserCreateRequest {
     pub email: EmailAddress,
     pub password: Option<UserPassword>,
     pub oauth2_registration_token: Option<OAuth2RegistrationToken>,
+    pub preferred_language: Option<UserLocale>,
+    pub timezone: Option<Tz>,
 }
 
 #[derive(Debug, Error)]
@@ -184,6 +188,8 @@ pub struct UserUpdateUserRequest {
     pub enabled: PatchValue<bool>,
     pub admin: PatchValue<bool>,
     pub newsletter: PatchValue<bool>,
+    pub preferred_language: PatchValue<UserLocale>,
+    pub timezone: PatchValue<Tz>,
 }
 
 #[derive(Debug)]

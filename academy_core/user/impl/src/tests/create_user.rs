@@ -28,6 +28,8 @@ async fn ok() {
         email: FOO.user.email.clone().unwrap(),
         password: Some("secure password".try_into().unwrap()),
         oauth2_registration_token: None,
+        preferred_language: None,
+        timezone: None,
     };
 
     let expected = Login {
@@ -85,6 +87,8 @@ async fn ok_oauth2() {
         email: FOO.user.email.clone().unwrap(),
         password: None,
         oauth2_registration_token: Some(token.clone()),
+        preferred_language: None,
+        timezone: None,
     };
 
     let expected = Login {
@@ -148,6 +152,8 @@ async fn no_login_method() {
         email: FOO.user.email.clone().unwrap(),
         password: None,
         oauth2_registration_token: None,
+        preferred_language: None,
+        timezone: None,
     };
 
     let sut = Sut::default();
@@ -170,6 +176,8 @@ async fn invalid_recaptcha_response() {
         email: FOO.user.email.clone().unwrap(),
         password: Some("secure password".try_into().unwrap()),
         oauth2_registration_token: None,
+        preferred_language: None,
+        timezone: None,
     };
 
     let captcha =
@@ -202,6 +210,8 @@ async fn name_conflict() {
         email: FOO.user.email.clone().unwrap(),
         password: Some("secure password".try_into().unwrap()),
         oauth2_registration_token: None,
+        preferred_language: None,
+        timezone: None,
     };
 
     let db = MockDatabase::build(false);
@@ -238,6 +248,8 @@ async fn email_conflict() {
         email: FOO.user.email.clone().unwrap(),
         password: Some("secure password".try_into().unwrap()),
         oauth2_registration_token: None,
+        preferred_language: None,
+        timezone: None,
     };
 
     let db = MockDatabase::build(false);
@@ -278,6 +290,8 @@ async fn oauth2_invalid_registration_token() {
         email: FOO.user.email.clone().unwrap(),
         password: None,
         oauth2_registration_token: Some(token.clone()),
+        preferred_language: None,
+        timezone: None,
     };
 
     let captcha = MockCaptchaService::new().with_check(Some("resp"), Ok(()));
@@ -320,6 +334,8 @@ async fn oauth2_remote_already_linked() {
                 .try_into()
                 .unwrap(),
         ),
+        preferred_language: None,
+        timezone: None,
     };
 
     let db = MockDatabase::build(false);
@@ -376,5 +392,7 @@ fn req_to_cmd(req: &UserCreateRequest) -> UserCreateCommand {
                 provider_id: TEST_OAUTH2_PROVIDER_ID.clone(),
                 remote_user: FOO_OAUTH2_LINK_1.remote_user.clone(),
             }),
+        preferred_language: None,
+        timezone: None,
     }
 }

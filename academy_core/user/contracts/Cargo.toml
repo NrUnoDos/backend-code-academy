@@ -18,5 +18,6 @@ academy_shared_contracts.workspace = true
 academy_utils.workspace = true
 anyhow.workspace = true
 chrono.workspace = true
+chrono-tz.workspace = true
 mockall = { workspace = true, optional = true }
 thiserror.workspace = true

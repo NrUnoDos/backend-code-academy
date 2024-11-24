@@ -8,11 +8,13 @@ use academy_models::{
     user::{
         User, UserComposite, UserDetails, UserFilter, UserId, UserInvoiceInfo,
         UserInvoiceInfoPatchRef, UserName, UserPatchRef, UserProfile, UserProfilePatchRef,
+        UserLocale,
     },
 };
 use academy_persistence_contracts::user::{UserRepoError, UserRepository};
 use academy_utils::{patch::PatchValue, trace_instrument};
 use bb8_postgres::tokio_postgres::{self, types::ToSql, Row};
+use chrono_tz::Tz;
 use uuid::Uuid;
 
 use crate::{arg_indices, columns, ColumnCounter, PostgresTransaction};
@@ -20,7 +22,7 @@ use crate::{arg_indices, columns, ColumnCounter, PostgresTransaction};
 #[derive(Debug, Clone, Copy, Default, Build)]
 pub struct PostgresUserRepository;
 
-columns!(user as "u": "id", "name", "email", "email_verified", "created_at", "last_login", "last_name_change", "enabled", "admin", "newsletter");
+columns!(user as "u": "id", "name", "email", "email_verified", "created_at", "last_login", "last_name_change", "enabled", "admin", "newsletter", "preferred_language", "timezone");
 columns!(profile as "p": "user_id", "display_name", "bio", "tags");
 columns!(details as "d": "user_id", "mfa_enabled", "password_login", "oauth2_login");
 columns!(invoice_info as "i": "user_id", "business", "first_name", "last_name", "street", "zip_code", "city", "country", "vat_id");
@@ -211,6 +213,8 @@ impl UserRepository<PostgresTransaction> for PostgresUserRepository {
                     &user.enabled,
                     &user.admin,
                     &user.newsletter,
+                    &user.preferred_language.as_str(),
+                    &user.timezone.name(),
                 ],
             )
             .await
@@ -270,12 +274,16 @@ impl UserRepository<PostgresTransaction> for PostgresUserRepository {
             enabled,
             admin,
             newsletter,
+            preferred_language,
+            timezone,
         }: UserPatchRef<'a>,
     ) -> Result<bool, UserRepoError> {
         let mut query = "update users set id=id".to_owned();
         let mut params: Vec<&(dyn ToSql + Sync)> = vec![&*user_id];
 
         let email = email.map(|x| x.as_ref().map(|x| x.as_str()));
+        let preferred_language = preferred_language.map(|x| x.as_str());
+        let timezone = timezone.map(|x| x.name());
 
         if let PatchValue::Update(name) = name {
             params.push(&**name);
@@ -308,6 +316,14 @@ impl UserRepository<PostgresTransaction> for PostgresUserRepository {
         if let PatchValue::Update(newsletter) = newsletter {
             params.push(newsletter);
             write!(&mut query, ", newsletter=${}", params.len()).unwrap();
+        }
+        if let PatchValue::Update(preferred_language) = &preferred_language {
+            params.push(preferred_language);
+            write!(&mut query, ", preferred_language=${}", params.len()).unwrap();
+        }
+        if let PatchValue::Update(timezone) = &timezone {
+            params.push(timezone);
+            write!(&mut query, ", timezone=${}", params.len()).unwrap();
         }
 
         query.push_str(" where id=$1");
@@ -536,6 +552,8 @@ fn decode_user(row: &Row, cnt: &mut ColumnCounter) -> anyhow::Result<User> {
         enabled: row.get(cnt.idx()),
         admin: row.get(cnt.idx()),
         newsletter: row.get(cnt.idx()),
+        preferred_language: row.get::<_, String>(cnt.idx()).parse().unwrap_or(UserLocale::De),
+        timezone: row.get::<_, String>(cnt.idx()).parse().unwrap_or(Tz::Europe__Berlin),
     })
 }
 

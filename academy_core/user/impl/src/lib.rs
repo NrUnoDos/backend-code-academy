@@ -196,6 +196,8 @@ where
             enabled: true,
             email_verified: false,
             oauth2_registration,
+            preferred_language: request.preferred_language,
+            timezone: request.timezone,
         };
 
         let user = self.user.create(&mut txn, cmd).await.map_err(|err| {
@@ -241,6 +243,8 @@ where
                     enabled,
                     admin,
                     newsletter,
+                    preferred_language,
+                    timezone,
                 },
             profile: profile_update,
             invoice_info: invoice_info_update,
@@ -275,6 +279,8 @@ where
         let enabled = enabled.minimize(&user.enabled);
         let admin = admin.minimize(&user.admin);
         let newsletter = newsletter.minimize(&user.newsletter);
+        let preferred_language = preferred_language.minimize(&user.preferred_language);
+        let timezone = timezone.minimize(&user.timezone);
 
         let profile_update = profile_update.minimize(&profile);
 
@@ -436,6 +442,31 @@ where
                 .update_invoice_info(&mut txn, user.id, invoice_info, invoice_info_update)
                 .await
                 .context("Failed to update user invoice info")?;
+            commit = true;
+        }
+
+        if let PatchValue::Update(preferred_language) = preferred_language {
+            self.user_repo
+                .update(
+                    &mut txn, 
+                    user_id, 
+                    UserPatchRef::new().update_preferred_language(&preferred_language)
+                )
+                .await
+                .context("Failed to update user locale")?;
+            commit = true;
+        }
+
+        if let PatchValue::Update(timezone) = timezone {
+            user.timezone = timezone;
+            self.user_repo
+                .update(
+                    &mut txn,
+                    user_id, 
+                    UserPatchRef::new().update_timezone(&timezone)
+                )
+                .await
+                .context("Failed to update user timezone")?;
             commit = true;
         }
 

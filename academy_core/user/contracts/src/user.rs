@@ -4,9 +4,10 @@ use academy_models::{
     email_address::EmailAddress,
     oauth2::OAuth2Registration,
     pagination::PaginationSlice,
-    user::{UserComposite, UserDisplayName, UserFilter, UserName, UserPassword},
+    user::{UserComposite, UserDisplayName, UserFilter, UserLocale, UserName, UserPassword},
 };
 use thiserror::Error;
+use chrono_tz::Tz;
 
 #[cfg_attr(feature = "mock", mockall::automock)]
 pub trait UserService<Txn: Send + Sync + 'static>: Send + Sync + 'static {
@@ -47,6 +48,8 @@ pub struct UserCreateCommand {
     pub enabled: bool,
     pub email_verified: bool,
     pub oauth2_registration: Option<OAuth2Registration>,
+    pub preferred_language: Option<UserLocale>,
+    pub timezone: Option<Tz>,
 }
 
 #[derive(Debug, Error)]

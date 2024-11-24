@@ -25,6 +25,7 @@ academy_templates_contracts.workspace = true
 academy_utils.workspace = true
 anyhow.workspace = true
 chrono.workspace = true
+chrono-tz.workspace = true
 tracing.workspace = true
 
 [dev-dependencies]

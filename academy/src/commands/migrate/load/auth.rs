@@ -16,10 +16,11 @@ use academy_persistence_postgres::{
 use academy_shared_contracts::hash::HashService;
 use academy_shared_impl::hash::HashServiceImpl;
 use chrono::NaiveDateTime;
+use chrono_tz::Tz;
 use indicatif::ProgressIterator;
 use tracing::info;
 use uuid::Uuid;
-
+use academy_models::user::UserLocale;
 use super::DbConnection;
 
 pub async fn load(db: PostgresDatabase, auth: DbConnection) -> anyhow::Result<()> {
@@ -62,6 +63,8 @@ pub async fn load(db: PostgresDatabase, auth: DbConnection) -> anyhow::Result<()
         let city: Option<String> = row.get("city");
         let country: Option<String> = row.get("country");
         let vat_id: Option<String> = row.get("vat_id");
+        let preferred_language: Option<String> = row.get("preferred_language");
+        let timezone: Option<String> = row.get("timezone");
 
         let user = User {
             id: id.parse::<Uuid>()?.into(),
@@ -76,6 +79,8 @@ pub async fn load(db: PostgresDatabase, auth: DbConnection) -> anyhow::Result<()
             enabled,
             admin,
             newsletter: newsletter.unwrap_or(false),
+            preferred_language: preferred_language.map(|x| x.parse().unwrap()).unwrap_or(UserLocale::De),
+            timezone: timezone.map(|x| x.parse()).transpose()?.unwrap_or(Tz::Europe__Berlin),
         };
 
         let profile = UserProfile {

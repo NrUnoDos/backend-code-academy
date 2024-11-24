@@ -3,11 +3,12 @@ use academy_core_user_contracts::user::{
     UserCreateCommand, UserCreateError, UserListQuery, UserListResult, UserService,
 };
 use academy_di::Build;
-use academy_models::user::{User, UserComposite, UserDetails, UserInvoiceInfo, UserProfile};
+use academy_models::user::{User, UserComposite, UserDetails, UserInvoiceInfo, UserLocale, UserProfile};
 use academy_persistence_contracts::user::{UserRepoError, UserRepository};
 use academy_shared_contracts::{id::IdService, password::PasswordService, time::TimeService};
 use academy_utils::trace_instrument;
 use anyhow::{anyhow, Context};
+use chrono_tz::Tz;
 
 #[derive(Debug, Clone, Copy, Build, Default)]
 pub struct UserServiceImpl<Id, Time, Password, UserRepo, OAuth2CreateLink> {
@@ -61,6 +62,8 @@ where
             enabled,
             email_verified,
             oauth2_registration,
+            preferred_language,
+            timezone,
         }: UserCreateCommand,
     ) -> Result<UserComposite, UserCreateError> {
         let password_hash = match password {
@@ -84,6 +87,8 @@ where
             enabled,
             admin,
             newsletter: false,
+            preferred_language: preferred_language.unwrap_or(UserLocale::De),
+            timezone: timezone.unwrap_or(Tz::Europe__Berlin),
         };
 
         let profile = UserProfile {
@@ -253,6 +258,8 @@ mod tests {
             enabled: true,
             email_verified: false,
             oauth2_registration: None,
+            preferred_language: None,
+            timezone: None,
         };
 
         // Act
@@ -303,6 +310,8 @@ mod tests {
                 provider_id: TEST_OAUTH2_PROVIDER_ID.clone(),
                 remote_user: FOO_OAUTH2_LINK_1.remote_user.clone(),
             }),
+            preferred_language: None,
+            timezone: None,
         };
 
         // Act
@@ -350,6 +359,8 @@ mod tests {
             enabled: true,
             email_verified: false,
             oauth2_registration: None,
+            preferred_language: None,
+            timezone: None,
         };
 
         // Act
@@ -397,6 +408,8 @@ mod tests {
             enabled: true,
             email_verified: false,
             oauth2_registration: None,
+            preferred_language: None,
+            timezone: None,
         };
 
         // Act
@@ -447,6 +460,8 @@ mod tests {
                 provider_id: TEST_OAUTH2_PROVIDER_ID.clone(),
                 remote_user: FOO_OAUTH2_LINK_1.remote_user.clone(),
             }),
+            preferred_language: None,
+            timezone: None,
         };
 
         // Act
@@ -469,6 +484,8 @@ mod tests {
                 enabled: true,
                 admin: false,
                 newsletter: false,
+                preferred_language: UserLocale::De,
+                timezone: Tz::Europe__Berlin,
             },
             profile: UserProfile {
                 display_name: FOO.profile.display_name.clone(),

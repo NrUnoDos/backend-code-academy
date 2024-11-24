@@ -21,6 +21,7 @@ anyhow.workspace = true
 bb8 = { version = "0.8.6", default-features = false }
 bb8-postgres = { version = "0.8.1", default-features = false, features = ["with-chrono-0_4", "with-uuid-1"] }
 chrono.workspace = true
+chrono-tz.workspace = true
 ouroboros = { version = "0.18.4", default-features = false }
 paste.workspace = true
 tracing.workspace = true

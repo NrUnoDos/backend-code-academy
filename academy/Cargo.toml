@@ -39,6 +39,7 @@ academy_templates_impl.workspace = true
 academy_utils.workspace = true
 anyhow.workspace = true
 chrono.workspace = true
+chrono-tz.workspace = true
 clap.workspace = true
 clap_complete.workspace = true
 sentry = { version = "0.34.0", default-features = false, features = ["anyhow", "backtrace", "contexts", "panic", "debug-images", "reqwest", "rustls", "tracing"] }

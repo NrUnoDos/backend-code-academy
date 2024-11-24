@@ -1,3 +1,5 @@
+use chrono_tz::Tz;
+use std::option::Option;
 use std::sync::Arc;
 
 use academy_core_user_contracts::{
@@ -14,7 +16,7 @@ use academy_models::{
     user::{
         UserBio, UserCity, UserCountry, UserDisplayName, UserFirstName, UserInvoiceInfo,
         UserLastName, UserName, UserPassword, UserProfilePatch, UserStreet, UserTags, UserVatId,
-        UserZipCode,
+        UserZipCode, LocaleString, TimeZoneId, UserLocale,
     },
     RecaptchaResponse, VerificationCode,
 };
@@ -155,6 +157,8 @@ struct CreateRequest {
     password: StringOption<UserPassword>,
     oauth_register_token: StringOption<OAuth2RegistrationToken>,
     recaptcha_response: StringOption<RecaptchaResponse>,
+    preferred_language: StringOption<LocaleString>,
+    timezone: StringOption<TimeZoneId>,
 }
 
 async fn create(
@@ -167,6 +171,8 @@ async fn create(
         password,
         oauth_register_token,
         recaptcha_response,
+        preferred_language,
+        timezone,
     }): Json<CreateRequest>,
 ) -> Response {
     match user_service
@@ -177,6 +183,8 @@ async fn create(
                 email,
                 password: password.into(),
                 oauth2_registration_token: oauth_register_token.into(),
+                preferred_language: parse_locale(preferred_language),
+                timezone: parse_timezone(timezone),
             },
             user_agent.0.map(DeviceName::from_string_truncated),
             recaptcha_response.into(),
@@ -229,6 +237,8 @@ struct UpdateRequest {
     city: StringOption<UserCity>,
     country: StringOption<UserCountry>,
     vat_id: StringOption<UserVatId>,
+    preferred_language: StringOption<LocaleString>,
+    timezone: StringOption<TimeZoneId>,
 }
 
 async fn update(
@@ -254,6 +264,8 @@ async fn update(
         city,
         country,
         vat_id,
+        preferred_language,
+        timezone,
     }): Json<UpdateRequest>,
 ) -> Response {
     match user_service
@@ -274,6 +286,8 @@ async fn update(
                     enabled: enabled.into(),
                     admin: admin.into(),
                     newsletter: newsletter.into(),
+                    preferred_language: parse_locale(preferred_language).into(),
+                    timezone: parse_timezone(timezone).into(),
                 },
                 profile: UserProfilePatch {
                     display_name: Option::from(display_name).into(),
@@ -311,6 +325,16 @@ async fn update(
         Err(UserUpdateError::Auth(err)) => auth_error(err),
         Err(UserUpdateError::Other(err)) => internal_server_error(err),
     }
+}
+
+fn parse_locale(timezone: StringOption<LocaleString>) -> Option<UserLocale> {
+    Option::from(timezone)
+        .and_then(|x: LocaleString| x.as_str().parse().ok())
+}
+
+fn parse_timezone(timezone: StringOption<TimeZoneId>) -> Option<Tz> {
+    Option::from(timezone)
+        .and_then(|x: TimeZoneId| x.as_str().parse().ok())
 }
 
 fn update_docs(op: TransformOperation) -> TransformOperation {

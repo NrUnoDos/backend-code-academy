@@ -83,6 +83,8 @@ async fn create(
                 enabled,
                 email_verified,
                 oauth2_registration: None,
+                preferred_language: None,
+                timezone: None,
             },
         )
         .await

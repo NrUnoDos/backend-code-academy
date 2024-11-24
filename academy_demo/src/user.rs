@@ -1,14 +1,13 @@
 use std::sync::LazyLock;
 
-use academy_models::user::{
-    User, UserComposite, UserDetails, UserInvoiceInfo, UserPassword, UserProfile,
-};
+use academy_models::user::{User, UserComposite, UserDetails, UserInvoiceInfo, UserLocale, UserPassword, UserProfile};
 use academy_persistence_contracts::user::UserRepository;
 use argon2::{
     password_hash::{rand_core::OsRng, SaltString},
     Argon2, PasswordHasher,
 };
 use chrono::{TimeZone, Utc};
+use chrono_tz::Tz;
 use uuid::uuid;
 
 pub static ALL_USERS: LazyLock<Vec<&UserComposite>> =
@@ -26,6 +25,8 @@ pub static ADMIN: LazyLock<UserComposite> = LazyLock::new(|| UserComposite {
         enabled: true,
         admin: true,
         newsletter: false,
+        preferred_language: UserLocale::De,
+        timezone: Tz::Europe__Berlin,
     },
     profile: UserProfile {
         display_name: "Administrator".try_into().unwrap(),
@@ -55,6 +56,8 @@ pub static ADMIN2: LazyLock<UserComposite> = LazyLock::new(|| UserComposite {
         enabled: true,
         admin: true,
         newsletter: true,
+        preferred_language: UserLocale::De,
+        timezone: Tz::Europe__Berlin,
     },
     profile: UserProfile {
         display_name: "Administrator2".try_into().unwrap(),
@@ -84,6 +87,8 @@ pub static FOO: LazyLock<UserComposite> = LazyLock::new(|| UserComposite {
         enabled: true,
         admin: false,
         newsletter: true,
+        preferred_language: UserLocale::De,
+        timezone: Tz::Europe__Berlin,
     },
     profile: UserProfile {
         display_name: "Foo 42".try_into().unwrap(),
@@ -128,6 +133,8 @@ pub static BAR: LazyLock<UserComposite> = LazyLock::new(|| UserComposite {
         enabled: false,
         admin: false,
         newsletter: false,
+        preferred_language: UserLocale::En,
+        timezone: Tz::UTC,
     },
     profile: UserProfile {
         display_name: "Bar".try_into().unwrap(),

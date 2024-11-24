@@ -1,7 +1,9 @@
+use std::str::FromStr;
 use std::sync::LazyLock;
 
 use academy_utils::patch::Patch;
 use chrono::{DateTime, Utc};
+use chrono_tz::Tz;
 use nutype::nutype;
 use regex::Regex;
 use schemars::{gen::SchemaGenerator, schema::Schema, JsonSchema};
@@ -61,6 +63,8 @@ pub struct User {
     pub enabled: bool,
     pub admin: bool,
     pub newsletter: bool,
+    pub preferred_language: UserLocale,
+    pub timezone: Tz,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Patch)]
@@ -163,6 +167,8 @@ nutype_string!(UserZipCode(validate(len_char_max = 16)));
 nutype_string!(UserCity(validate(len_char_max = 64)));
 nutype_string!(UserCountry(validate(len_char_max = 64)));
 nutype_string!(UserVatId(validate(len_char_max = 64)));
+nutype_string!(LocaleString(validate(regex = "^(de|en)$")));
+nutype_string!(TimeZoneId(validate(len_char_max = 32)));
 
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
 pub struct UserFilter {
@@ -173,6 +179,34 @@ pub struct UserFilter {
     pub mfa_enabled: Option<bool>,
     pub email_verified: Option<bool>,
     pub newsletter: Option<bool>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
+pub enum UserLocale {
+    #[default]
+    De,
+    En,
+}
+
+impl UserLocale {
+    pub fn as_str(&self) -> &'static str {
+        match self {
+            UserLocale::De => "de",
+            UserLocale::En => "en",
+        }
+    }
+}
+
+impl FromStr for UserLocale {
+    type Err = &'static str;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "de" => Ok(UserLocale::De),
+            "en" => Ok(UserLocale::En),
+            _ => Err("Unsupported locale"),
+        }
+    }
 }
 
 #[cfg(test)]
