@@ -4,3 +4,4 @@ result
 .direnv
 .devenv
 .lcov*
+.idea
